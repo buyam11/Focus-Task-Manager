@@ -128,7 +128,7 @@ export default function TaskBoard() {
 
       {/* App header */}
       <div className='mb-10'>
-        <h1 className=''>
+        <h1 className='text-4xl font-bold tracking-tight text-white'>
             Focus
         </h1>
         <p>
