@@ -139,7 +139,9 @@ export default function TaskBoard() {
         </p>
       </div>
 
-      {/* TasksStats: sibling that receives the counts as props from TaskBoard */}
+      {/* TasksStats: sibling that TaskBoard passes props to 
+          (total, completed, active, onClearCompleted)
+          so it can receive the counts */}
       <TaskStats
         total={tasks.length}
         completed={completed}
