@@ -7,6 +7,7 @@
 // TYPE: Client Component ('use client' because this file uses useState and useEffect)
 // PROPS: None - this is the top-level of the client component tree
 // ==========================================================================================================
+'use client';
 
 import { useState, useEffect } from 'react';
 import TaskStats   from './TaskStats';
