@@ -5,10 +5,10 @@
 //          It is purely a display component that renders whatever numbers TaskBoard passes down.
 // TYPE: Client Component ('use client' because this file uses an onClick callback and conditionals)
 // PROPS: 
-//   total              (number) - total task count
-//   active             (number) - tasks not done
-//   completed          (number) - tasks done
-//   onClearCompleted   (function) - callback defined in TaskBoard that is called 
+//    total              (number) - total task count
+//    active             (number) - tasks not done
+//    completed          (number) - tasks done
+//    onClearCompleted   (function) - callback defined in TaskBoard that is called 
 //                                   when the clear button is clicked
 // ==========================================================================================================
 
