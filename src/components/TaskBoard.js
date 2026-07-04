@@ -58,14 +58,14 @@ export default function TaskBoard() {
     // Effect 2: keep the brower tab in sync with the active count.
     // useEffect allows React to manage document.title
     //
-    // [tasks] dependency: the active count changes when tasks changes.
+    // The active count only changes when tasks changes, hence [tasks] dependency.
   useEffect(() => {
-    const active = tasks.filter((t) => !t.done).length;
+    const activeCount = tasks.filter((t) => !t.done).length;
     document.title = activeCount > 0
         ? `(${activeCount}) Focus - Task Manager`
         : 'Focus - Task Manager';
     
-    // The return value is a "cleanup function," and resets the title so we don't leave an old count in the tab
+    // The return value is a "cleanup function," and resets the title so we don't leave an old count in the tab.
     return () => { document.title = 'Focus - Task Manager' ;};
   }, [tasks]);
 
@@ -74,13 +74,14 @@ export default function TaskBoard() {
 // ---Derived values (calculated fresh in every render)---
     
     // These are NOT in state. They can be calculated directly from 'tasks' which IS in state.
-    // Storing them in separately would mean updating them updating them in every handler (handleAdd, handleDelete,
+    // Storing them separately in state would mean updating them updating them in every handler (handleAdd, handleDelete,
     // handleToggle, handleClearDone), which would leave room for bugs and errors.
+    // Calculating fresh on every render prevents such problems, and makes the code simpler.
   const completedCount = tasks.filter((t) => t.done).length;
   const activeCount = tasks.length - completed;
     
     // visible is what TaskList actually renders. It depends on both 'tasks' and 'filter'.
-    // Storing it separately would require updating it whenever EITHER change, which is error-prone.
+    // Storing it separately in state would require updating it whenever EITHER change, which is error-prone.
   const visible =
     filter === 'all'  ? tasks :
     filter === 'done' ? tasks.filter((t) =>  t.done) :
