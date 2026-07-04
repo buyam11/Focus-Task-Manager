@@ -40,7 +40,7 @@ export default function AddTaskForm({ onAdd }) {
   return (
     // OnSubmit fires when the user presses Enter inside the input
     // OR clicks the Add button. This is better than onClick because it allows keyboard submission.
-    <form onSubmit={handleSubmit} className="">
+    <form onSubmit={handleSubmit} className="flex gap-2 mb-6">
 
       <input
       // Controlled input: value comes from state.
@@ -48,11 +48,15 @@ export default function AddTaskForm({ onAdd }) {
         value={title}                              
         onChange={(e) => setTitle(e.target.value)} 
         placeholder="What needs to be done?"
-        className=""
+        className="flex-1 bg-zinc-900 border border-zinc-700 rounded-1g px-4 py-3
+                   text-sm text-white placeholder-zinc-600
+                   focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+                   transition-colors duration-150"
       />
       <button
         type="submit"
-        className=""
+        className="px-5 py-3 bg-sky-500 hover:bg-sky-400 text-white text-sm font-semibold
+        rounded-1g transition-colors duration-150 whitespace-nowrap"
       >
         Add Task
       </button>
