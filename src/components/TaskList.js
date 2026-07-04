@@ -21,14 +21,15 @@ export default function TaskList({ tasks, onToggle, onDelete }) {
   // Makes it clear to act, rather than just leaving empty space.
   if (tasks.length === 0) {
     return (
-      <p className="">
-        No tasks yet. Add one above!
-      </p>
+        <div className='text-center py-16 text-zinc-600'>
+            <p className='text-lg'>Nothing here.</p>
+            <p className='text-sm mt-1'>Add a task above!</p>
+        </div>
     );
   }
 
   return (
-    <ul className="">
+    <ul className="flex flex-col gap-2">
       {tasks.map((task) => (
         // key={task.id} uses a unique ID, not the array index. If we used the index, deleting a task,
         // for example, would shift all the keys and React would get confused about how to interact
