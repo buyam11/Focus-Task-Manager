@@ -56,7 +56,7 @@ export default function AddTaskForm({ onAdd }) {
       <button
         type="submit"
         className="px-5 py-3 bg-sky-500 hover:bg-sky-400 text-white text-sm font-semibold
-        rounded-1g transition-colors duration-150 whitespace-nowrap"
+        rounded-1g transition-colors duration-150 whitespace-nowrap cursor-pointer"
       >
         Add Task
       </button>
