@@ -21,7 +21,7 @@ const Filters = ['all', 'active', 'done'];
 
 export default function FilterBar({current, onFilterChange, counts}) {
     return (
-        <div className="">
+        <div className="flex gap-2 mb-6">
             {Filters.map((mode) => (
                 // onFilterChange is a callback defined in Taskboard (TaskBoard's setFilter function
                 // passed as a prop) which handles the state update. FiltersBar just signals upward 
