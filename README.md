@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Focus - Task Manager
+A dark-mode task manager built with Next.js, demonstrating React functions: components, props, state, effect, lifting state up.
 
 ## Getting Started
 
-First, run the development server:
+Step 1: Clone the repository
+
+```bash
+git clone <repository-url>
+```
+
+Step 2: Navigate to project resume
+
+```bash
+cd task-manager-project
+```
+
+Step 3: Install dependencies
+
+```bash
+npm install
+```
+
+Step 4: Start the server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Step 5: Open the broswer
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Open [http://localhost:3000] with your browser to see the result.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features Implemented
+- Add tasks with a controlled form (blank submissions are ignored)
+- Toggle tasks done/undone with a visual strikethrough
+- Delete individual tasks
+- Filter by All/Active/Done with live countsper filter
+- Stats bar total, active, and completed counts
+- Clear all completed tasks in one click
+- Tasks persist across browser refreshes via localStorage
+- Styled with TailWind CSS
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+src/
+    app/
+        page.js         - Client component: renders TaskBoard
+        layout.js       - Root layout: sets font and dark background
+        globals.css     - Tailwind directives only
+    components/
+        TaskBoard.js    - Client component: owns ALL state and handlers
+        TaskStats.js    - Displays live counts and clear button
+        AddTaskForm.js  - Controlled form for adding tasks
+        FilterBar.js    - All / Active/ Done filter buttons
+        TaskList.js     - Renders the filtered tasks
+        TaskCard.js     - Single task row with toggle and delete
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## AI Usage Log
+- *Generate scaffolding, then read it line by line* - asked Claude to create each component with comments that explain each line,then I relay how I I interpreted each explanation in simpler terms back to the AI to see if they make sense
+ - *Ask conceptual questions* - asked Claude questions about why the code works (e.g. how the dependency array works, immutable vs. immutable updates, etc.)
+- *Generate Tailwind* - asked Claude what Tailwind variations would help me create a dark mode task manager
