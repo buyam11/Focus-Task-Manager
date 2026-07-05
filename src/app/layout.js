@@ -1,10 +1,10 @@
-// =====================================================================================
+// ==========================================================================================================
 // COMPONENT: RootLayout
 // PURPOSE : The root wraps every page in the app. Sets the HTML lang attribute, imports global CSS
 //           (which contains Tailwind CSS), and applies a dark background color for the whole document.
 // TYPE: Server Component (no interactivity needed)
 // PROPS: children - whatever page.js renders
-// =====================================================================================
+// ==========================================================================================================
 
 import "./globals.css";
 
