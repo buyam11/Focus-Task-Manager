@@ -8,8 +8,8 @@
 //    total              (number) - total task count
 //    active             (number) - tasks not done
 //    completed          (number) - tasks done
-//    onClearCompleted   (function) - callback defined in TaskBoard that is called 
-//                                   when the clear button is clicked
+//    onClearCompleted   (function) - callback to TaskBoard's handleClearDone, which is called 
+//                                    when the clear button is clicked
 // ==========================================================================================================
 
 'use client';
