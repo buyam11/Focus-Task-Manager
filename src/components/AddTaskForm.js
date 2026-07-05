@@ -7,7 +7,7 @@
 //   Client Component ('use client' because this file uses useState and handles form events)
 //   Controlled component (input comes from state)  
 // PROPS: 
-//    onAdd (function) - callback defined in TaskBoard and is called with the trimmed title string
+//    onAdd (function) - callback defined in TaskBoard, which is called with the trimmed title string
 //                       on submission
 // ==========================================================================================================
 
