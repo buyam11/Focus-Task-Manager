@@ -1,7 +1,7 @@
 // ==========================================================================================================
 // COMPONENT: TaskBoard
 // PURPOSE: Think of this component as the brain of the app. This is the common ancestor that owns all state.
-//          TaskStats, AddTaskForm,, FilterBar, and TaskList are siblings, meaning that none of them "know"
+//          TaskStats, AddTaskForm, FilterBar, and TaskList are siblings, meaning that none of them "know"
 //          each other directly, so all shared data flow down as props. This is called 'lifting state up,'
 //          which is how React flows data.
 // TYPE: Client Component ('use client' because this file uses useState and useEffect)
@@ -12,6 +12,7 @@
 import { useState, useEffect } from 'react';
 import TaskStats   from './TaskStats';
 import AddTaskForm from './AddTaskForm';
+import FilterBar from './FilterBar';
 import TaskList    from './TaskList';
 
 export default function TaskBoard() {
@@ -19,25 +20,27 @@ export default function TaskBoard() {
 //  ----State---
 
     //  tasks is a state variable (not a static variable) because the whole app needs to re-render whenever
-    //  tasks change. Adding, toggling, or deleting a task must instantly update the list, stats bar, and filter count
-    //  on screen. Only state can trigger that re-render.
+    //  tasks change. Adding, toggling, or deleting a task must instantly update the list, stats bar, 
+    // and filter count on screen. Only state can trigger that re-render.
     //
     // The function passed to useState is a "lazy initializor." It runs ONCE on the first render.
     // I read localStorage here because it only exists in the browser, not the server.
     //
-    // typeof window === 'undefined'is the server-side guard. Next.js renders components on the SERVER, before sending
-    // HTML to the browser. Meaning that trying to access localStorage, which only exists in the browser, without a server-side 
-    // guard would crash the app. This check returns an empty array if we are on the server, letting it render safely. 
-    // The browser render will follow with the saved data from localStorage.
+    // typeof window === 'undefined'is the server-side guard. Next.js renders components on the SERVER, 
+    // before sending HTML to the browser. Meaning that trying to access localStorage, which only exists 
+    // in the browser, without a server-side guard would crash the app. This check returns an empty array 
+    // if we are on the server, letting it render safely. The browser render will follow with the saved 
+    // data from localStorage.
   const [tasks, setTasks] = useState(() => {
     if (typeof window === 'undefined') return [];
     const saved = localStorage.getItem('tasks');
-    // localStorage stores plain text so the array was saved as a JSON string. JSON.parse converts it to a JS array.
-    // If nothing was saved, start with an empty array
+    // localStorage stores plain text so the array was saved as a JSON string. 
+    // JSON.parse converts it to a JS array. If nothing was saved, start with an empty array
     return saved ? JSON.parse(saved) : [];
   });
 
-    // filter has its own useState because it changes independently from tasks. It doesn't modify, add, or remove tasks.
+    // filter has its own useState because it changes independently from tasks. 
+    // It doesn't modify, add, or remove tasks.
   const [filter, setFilter] = useState('all'); // 'all' | 'active' | 'done'
 
     
@@ -65,7 +68,8 @@ export default function TaskBoard() {
         ? `(${activeCount}) Focus - Task Manager`
         : 'Focus - Task Manager';
     
-    // The return value is a "cleanup function," and resets the title so we don't leave an old count in the tab.
+    // The return value is a "cleanup function," 
+    // and resets the title so we don't leave an old count in the tab.
     return () => { document.title = 'Focus - Task Manager' ;};
   }, [tasks]);
 
@@ -74,8 +78,8 @@ export default function TaskBoard() {
 // ---Derived values (calculated fresh in every render)---
     
     // These are NOT in state. They can be calculated directly from 'tasks' which IS in state.
-    // Storing them separately in state would mean updating them updating them in every handler (handleAdd, handleDelete,
-    // handleToggle, handleClearDone), which would leave room for bugs and errors.
+    // Storing them separately in state would mean updating them updating them in every handler 
+    // (handleAdd, handleDelete, handleToggle, handleClearDone), which would leave room for bugs and errors.
     // Calculating fresh on every render prevents such problems, and makes the code simpler.
   const completedCount = tasks.filter((t) => t.done).length;
   const activeCount = tasks.length - completedCount;
@@ -106,7 +110,8 @@ export default function TaskBoard() {
   }
 
   function handleToggle(id) {
-    // .map() returns a NEW array (immutable). For the task matching the id, we spread {...t} into a new object (preventing mutations)
+    // .map() returns a NEW array (immutable). 
+    // For the task matching the id, we spread {...t} into a new object (preventing mutations)
     // and flip done with !t.done. Every other task remains unchanged.
     setTasks(tasks.map((t) =>
       t.id === id ? { ...t, done: !t.done } : t
@@ -155,26 +160,18 @@ export default function TaskBoard() {
           TaskBoard receives the new title and updates state. */}
       <AddTaskForm onAdd={handleAdd} />
 
-      {/* Filter buttons — clicking one just updates the `filter` variable */}
-      <div className="flex gap-2 mb-4">
-        {['all', 'active', 'done'].map((mode) => (
-          <button
-            key={mode}
-            onClick={() => setFilter(mode)}
-            className={`px-3 py-1 rounded text-sm border ${
-              filter === mode
-                ? 'bg-green-700 text-white border-green-700'
-                : 'bg-white text-gray-700 border-gray-300'
-            }`}
-          >
-            {mode[0].toUpperCase() + mode.slice(1)}
-          </button>
-        ))}
-      </div>
+      {/* FilterBar: sibling that controls which tasks are visible.
+          Calls setFilter, via onFilterChange, when a button is clicked, and receives the current filter
+          so it knows which filter to highlight. */}
+      <FilterBar
+        current={filter}
+        onFilterChange={setFilter}
+        counts={{ all: tasks.length, active: activeCount, done: completedCount}}
+      />  
 
       {/* TaskList: sibling that renders the tasks list.
           Receives the already-filtered 'visible' array that TaskBoard has done.
-          Callbacks flow down for toggle and delete. */}
+          Callbacks flow down to TaskCards for toggle and delete. */}
       <div className="border rounded-lg overflow-hidden shadow-sm">
         <TaskList
           tasks={visible}
