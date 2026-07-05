@@ -23,22 +23,23 @@
 
 export default function TaskCard({ id, title, done, onToggle, onDelete }) {
   return (
-    <div className="">
-        {/* Toggle button — calls parent's onToggle, passing this task's id */}
+    <div className="flex items-center gap-3 px-4 py-4 rounded-lg bg-zinc-900 border border-zinc-800">
+        {/* Toggle button — calls parent's onToggle, passing this task's id.
+            Fills circle green when done. */}
         <button
             className={`w-5 h-5 rounded-full border-2 flex-shrink-0 transition-colors cursor-pointer
                       ${done ? 'bg-emerald-500 border-emerald-500' : 'border-zinc-600 hover:border-sky-400'}`}
             onClick={() => onToggle(id)}
         />
 
-      {/* Title */}
+      {/* Title - strikethrough and dimmed when done */}
       <span className={`flex-1 text-sm ${done ? 'line-through text-zinc-500' : 'text-zinc-100'}`}>
         {title}
       </span>
 
         {/* Delete button — calls parent's onDelete, passing this task's id */}
         <button
-          className="text-zinc-600 hover:text-red-400 cursor-pointer"
+          className="text-red-400 hover:underline cursor-pointer"
           onClick={() => onDelete(id)}
         >
           Delete
