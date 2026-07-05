@@ -43,6 +43,7 @@ Open [http://localhost:3000] with your browser to see the result.
 
 ## Project Structure
 
+```bash
 src/
     app/
         page.js         - Client component: renders TaskBoard
@@ -55,8 +56,9 @@ src/
         FilterBar.js    - All / Active/ Done filter buttons
         TaskList.js     - Renders the filtered tasks
         TaskCard.js     - Single task row with toggle and delete
+```
 
 ## AI Usage Log
-- *Generate scaffolding, then read it line by line* - asked Claude to create each component with comments that explain each line,then I relay how I I interpreted each explanation in simpler terms back to the AI to see if they make sense
- - *Ask conceptual questions* - asked Claude questions about why the code works (e.g. how the dependency array works, immutable vs. immutable updates, etc.)
-- *Generate Tailwind* - asked Claude what Tailwind variations would help me create a dark mode task manager
+- **Generate scaffolding, then read it line by line** - asked Claude to create each component with comments that explain each line,then I relay how I I interpreted each explanation in simpler terms back to the AI to see if they make sense
+ - **Ask conceptual questions** - asked Claude questions about why the code works (e.g. how the dependency array works, immutable vs. immutable updates, why is localStorage needed, etc.)
+- **Generate Tailwind** - asked Claude what Tailwind variations would help me create a dark mode task manager
