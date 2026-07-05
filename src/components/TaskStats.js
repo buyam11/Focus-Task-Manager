@@ -31,7 +31,7 @@ export default function TaskStats({ total, completed, active, onClearCompleted }
 
         <div className="text-center">
           <p className="text-xl font-bold text-emerald-400">{completed}</p>
-          <p className="">Done</p>
+          <p className="text-xs text-zinc-500 uppercase tracking-widest">Done</p>
         </div>
 
         <div className="text-center">
@@ -50,7 +50,7 @@ export default function TaskStats({ total, completed, active, onClearCompleted }
         // the button.
           onClick={onClearCompleted}
           className="text-xs text-zinc-400 hover:text-red-400 transition-colors duration-1
-          50 underline underline-offset-2"
+          50 underline underline-offset-2 cursor-pointer"
         >
           Clear {completed} done
         </button>
