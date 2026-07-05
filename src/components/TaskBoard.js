@@ -78,7 +78,7 @@ export default function TaskBoard() {
     // handleToggle, handleClearDone), which would leave room for bugs and errors.
     // Calculating fresh on every render prevents such problems, and makes the code simpler.
   const completedCount = tasks.filter((t) => t.done).length;
-  const activeCount = tasks.length - completed;
+  const activeCount = tasks.length - completedCount;
     
     // visible is what TaskList actually renders. It depends on both 'tasks' and 'filter'.
     // Storing it separately in state would require updating it whenever EITHER change, which is error-prone.
@@ -145,8 +145,8 @@ export default function TaskBoard() {
           so it can receive the counts */}
       <TaskStats
         total={tasks.length}
-        completed={completed}
-        active={active}
+        completed={completedCount}
+        active={activeCount}
         onClearCompleted={handleClearDone}
       />
 
