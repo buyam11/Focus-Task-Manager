@@ -10,8 +10,8 @@ import TaskBoard from '@/components/TaskBoard';
 
 export default function HomePage() {
   return (
-    // min-h-screen fills the full viewport height so the dark background
-    // overs the whole page, not just the content
+    // min-h-screen fills the full viewport height so the dark background 
+    // hovers the whole page, not just the content.
     <main className="min-h-screen pg-zinc-950">
       <TaskBoard />
     </main>
