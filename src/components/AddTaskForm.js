@@ -5,7 +5,7 @@
 //          Once submitted, TaskBoard handles the state update.
 // TYPE: 
 //   Client Component ('use client' because this file uses useState and handles form events)
-//   Controlled component (input comes from state)  
+//   Controlled component (input comes from title state)  
 // PROPS: 
 //    onAdd (function) - callback defined in TaskBoard, which is called with the trimmed title string
 //                       on submission
@@ -18,7 +18,7 @@ import { useState } from 'react';
 export default function AddTaskForm({ onAdd }) {
   
   // title is in LOCAL state here because only this component should know what the user is typing.
-  // TaskBoard only needs to know the final value being submitted
+  // TaskBoard only needs to know the final value being submitted.
   const [title, setTitle] = useState('');
 
   function handleSubmit(e) {
@@ -43,7 +43,7 @@ export default function AddTaskForm({ onAdd }) {
     <form onSubmit={handleSubmit} className="flex gap-2 mb-6">
 
       <input
-      // Controlled input: value comes from state.
+      // Controlled input: value comes from title state.
       // onChange updates state on every keystroke, which re-renders the input.
         value={title}                              
         onChange={(e) => setTitle(e.target.value)} 

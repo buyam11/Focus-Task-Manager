@@ -24,8 +24,8 @@ export default function FilterBar({current, onFilterChange, counts}) {
         <div className="flex gap-2 mb-6">
             {Filters.map((mode) => (
                 // onFilterChange is a callback defined in Taskboard (TaskBoard's setFilter function
-                // passed as a prop) which handles the state update. FiltersBar just signals upward 
-                // that the user clicked the button.
+                // passed as a prop) which handles the state update. .map() sets each filter as a mode
+                // so that FiltersBar signals upward which button the user clicked.
                 <button
                     key={mode}
                     type="button"
@@ -38,7 +38,7 @@ export default function FilterBar({current, onFilterChange, counts}) {
                         : 'bg-zinc-900 text-zinc-400 border border-zinc-700 hover:text-zinc-200 hover:border-zinc-500'}
                     `}
                 >   
-                    {/* Capitalize the first letter of the mode label and put the count in parentheses next to the label*/}
+                    {/* Capitalize the first letter of the mode label and put the count in parentheses next to the label */}
                     {mode[0].toUpperCase() + mode.slice(1)} ({counts[mode]})
                 </button>
             ))}

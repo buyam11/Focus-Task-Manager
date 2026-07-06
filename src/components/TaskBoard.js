@@ -26,7 +26,7 @@ export default function TaskBoard() {
     // The function passed to useState is a "lazy initializor." It runs ONCE on the first render.
     // I read localStorage here because it only exists in the browser, not the server.
     //
-    // typeof window === 'undefined'is the server-side guard. Next.js renders components on the SERVER, 
+    // typeof window === 'undefined' is the server-side guard. Next.js renders components on the SERVER, 
     // before sending HTML to the browser. Meaning that trying to access localStorage, which only exists 
     // in the browser, without a server-side guard would crash the app. This check returns an empty array 
     // if we are on the server, letting it render safely. The browser render will follow with the saved 
@@ -35,7 +35,7 @@ export default function TaskBoard() {
     if (typeof window === 'undefined') return [];
     const saved = localStorage.getItem('tasks');
     // localStorage stores plain text so the array was saved as a JSON string. 
-    // JSON.parse converts it to a JS array. If nothing was saved, start with an empty array
+    // JSON.parse converts it to a JS array. If nothing was saved, start with an empty array.
     return saved ? JSON.parse(saved) : [];
   });
 
@@ -47,19 +47,19 @@ export default function TaskBoard() {
 
 // ----Effects----
 
-    // Effect 1: keeps localStoragein sync with tasks array.
+    // Effect 1: keeps localStorage in sync with tasks array.
     // useEffect allows React to manage localStorage.
     //
     // How this effect runs with [tasks] as the dependency array:
     //  1. localStorage runs on the first render.
-    //  2. Every change to the tasks (add/toggle/delete) will save
+    //  2. Every change to the tasks (add/toggle/delete) will save.
   useEffect(() => {
     // JSON.stringify converts the text into plain text so localStorage can store it.
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
     // Effect 2: keep the brower tab in sync with the active count.
-    // useEffect allows React to manage document.title
+    // useEffect allows React to manage document.title.
     //
     // The active count only changes when tasks changes, hence [tasks] dependency.
   useEffect(() => {
@@ -78,7 +78,7 @@ export default function TaskBoard() {
 // ---Derived values (calculated fresh in every render)---
     
     // These are NOT in state. They can be calculated directly from 'tasks' which IS in state.
-    // Storing them separately in state would mean updating them updating them in every handler 
+    // Storing them separately in state would mean updating them in every handler 
     // (handleAdd, handleDelete, handleToggle, handleClearDone), which would leave room for bugs and errors.
     // Calculating fresh on every render prevents such problems, and makes the code simpler.
   const completedCount = tasks.filter((t) => t.done).length;
@@ -99,9 +99,9 @@ export default function TaskBoard() {
     // Children calls them when a handler happens (ex. a click), and the update happens here.
   function handleAdd(title) {
     // Immutable: Spread [...tasks, newTask] builds a NEW array containing all existing tasks plus a new task.
-    // Mutate: we never push() onto the existing array because it mutates it. This means that when React compares
+    // Mutate: we never .push() onto the existing array because it mutates it. This means that when React compares
     // references, and a mutates reference has the SAME reference as before, React would not recognize a change and
-    // skip the re-render. In simpler terms, a new array = new reference = React re-renders
+    // skip the re-render. In simpler terms, a new array = new reference = React re-renders.
     const newTask ={
         id: crypto.randomUUID(),
         title, done : false,
@@ -147,7 +147,7 @@ export default function TaskBoard() {
 
       {/* TasksStats: sibling that TaskBoard passes props to 
           (total, completed, active, onClearCompleted)
-          so it can receive the counts */}
+          so it can receive the counts. */}
       <TaskStats
         total={tasks.length}
         completed={completedCount}
@@ -155,7 +155,7 @@ export default function TaskBoard() {
         onClearCompleted={handleClearDone}
       />
 
-      {/* AddTaskForm: sibling that needs to ADD a tasks.
+      {/* AddTaskForm: sibling that needs to ADD a task.
           It signals to TaskBoard via the onAdd callback prop.
           TaskBoard receives the new title and updates state. */}
       <AddTaskForm onAdd={handleAdd} />

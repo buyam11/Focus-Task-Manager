@@ -17,7 +17,7 @@ import TaskCard from './TaskCard';
 
 export default function TaskList({ tasks, onToggle, onDelete }) {
   
-  // Empty-state guard: returns an invitation to add a task if there is nothing to show.
+  // Empty-state guard: returns an invitation to add a task if there is nothing to show (tasks.length === 0).
   // Makes it clear to act, rather than just leaving empty space.
   if (tasks.length === 0) {
     return (
